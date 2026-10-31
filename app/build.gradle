@@ -2,5 +2,5 @@ plugins { id 'com.android.application' }
 android {
  namespace 'com.golive.cinema'
  compileSdk 35
- defaultConfig { applicationId 'com.tcl.walleve'; minSdk 21; targetSdk 28; versionCode 1; versionName '0.1' }
+ defaultConfig { applicationId 'com.tcl.walleve'; minSdk 21; targetSdk 28; versionCode 512008; versionName '0.2' }
 }
