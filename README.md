@@ -1,6 +1,6 @@
 # Cinema Bridge｜同步院线键跳板
 
-[English](#english)
+[English](#english) · [TCL 电视 ADB 连接与快捷键攻略](docs/TCL电视ADB连接与快捷键攻略.md)
 
 Cinema Bridge 是一个 Android 电视快捷键跳板。它让支持的 TCL 遥控器上的**“同步院线”键**打开你选择的已安装应用，例如影视仓。选定后，再按该键即可直接启动目标应用；你可以随时更改选择。
 
