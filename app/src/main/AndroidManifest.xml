@@ -1,8 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
- <application android:label="影视仓快捷启动" android:theme="@android:style/Theme.Material.NoActionBar" android:allowBackup="false">
-  <activity android:name=".MainActivity" android:exported="true" android:excludeFromRecents="true" android:noHistory="true" />
-  <activity android:name=".SettingsActivity" android:exported="true" android:label="同步院线键设置">
-   <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/><category android:name="android.intent.category.LEANBACK_LAUNCHER"/></intent-filter>
-  </activity>
+ <application android:label="小T键桥接" android:theme="@android:style/Theme.Material.NoActionBar" android:allowBackup="false">
+  <activity android:name="com.golive.cinema.MainActivity" android:exported="true" android:excludeFromRecents="true" android:noHistory="true" />
+  <activity-alias android:name="com.tcl.walleve.introduction.LauncherActivity" android:targetActivity="com.golive.cinema.MainActivity" android:exported="true"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity-alias>
+  <activity android:name="com.golive.cinema.SettingsActivity" android:exported="true" android:label="小T键设置"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LEANBACK_LAUNCHER"/></intent-filter></activity>
  </application>
 </manifest>
