@@ -36,6 +36,28 @@ Cinema Bridge 是一个 Android 电视快捷键跳板。它让支持的 TCL 遥�
 
 选择保存在电视本地。安装或重新安装后，请实际测试遥控器；部分设备可能需要重启后再确认。卸载应用会删除其设置。
 
+## 乐视电视开机启动影视仓（实验功能）
+
+此功能在独立分支 [letv-boot-bridge](https://github.com/li01452/cinema-bridge/tree/letv-boot-bridge) 中，不影响上面的同步院线键功能。它提供一个开机接收器，在系统启动完成后等待 5 秒，再打开已安装的影视仓（包名 `com.huawei.himovceie`）。影视仓自身的开机接收器在测试电视上未能通过系统权限检查，因此使用这个助手代为启动。
+
+### 下载与安装
+
+1. 打开 [乐视启动助手的 GitHub Actions](https://github.com/li01452/cinema-bridge/actions/workflows/letv-boot.yml?branch=letv-boot-bridge)，选择成功的 **Build LeTV boot bridge** 运行。
+2. 下载该次运行的 `letv-boot-bridge-apk` Artifact 并解压 `app-debug.apk`。
+3. 通过 ADB 安装并重启电视验证：
+
+   ```bash
+   adb connect 电视IP:5555
+   adb install app-debug.apk
+   adb reboot
+   ```
+
+这台乐视 Android 9 电视已实测成功：重启后自动进入影视仓。助手需要 `RECEIVE_BOOT_COMPLETED` 权限；首次安装或更新后，若电视的权限管理界面询问，请允许它开机启动。乐视桌面和遥控器功能保持安装状态。
+
+### 更新与卸载
+
+GitHub Actions 输出的是调试签名 APK，不同构建的签名可能不同。若覆盖安装提示签名不匹配，先运行 `adb uninstall local.letv.bootbridge` 再安装新 APK。卸载助手会停止自动启动影视仓；不会卸载影视仓或乐视桌面。
+
 ## 构建
 
 项目使用 Java 17、Gradle 8.9、Android Gradle Plugin 8.7.3 和 Android SDK 35；最低支持 Android 5.0（API 21）。可通过 GitHub Actions 构建，也可在已配置 Android SDK 和 Gradle 的电脑上运行：
@@ -84,6 +106,28 @@ Actions currently produces a **debug-signed** APK. The signing key may differ be
 4. If the selected app has been removed or cannot be launched, the bridge displays a message and opens the selection list.
 
 The selection is stored locally on the TV. Test the button after installation or reinstallation; on some devices, also verify it after a restart. Uninstalling Cinema Bridge removes its settings.
+
+## LeTV boot launch for 影视仓 (experimental)
+
+This feature is on the separate [letv-boot-bridge](https://github.com/li01452/cinema-bridge/tree/letv-boot-bridge) branch and is independent of the Cinema button feature above. The helper receives the boot-completed broadcast, waits five seconds, and launches the installed 影视仓 app (`com.huawei.himovceie`). It works around the boot receiver permission failure observed on the tested television.
+
+### Download and install
+
+1. Open [LeTV boot bridge Actions](https://github.com/li01452/cinema-bridge/actions/workflows/letv-boot.yml?branch=letv-boot-bridge) and select a successful **Build LeTV boot bridge** run.
+2. Download its `letv-boot-bridge-apk` artifact and extract `app-debug.apk`.
+3. Install it with ADB and reboot to verify:
+
+   ```bash
+   adb connect TV_IP:5555
+   adb install app-debug.apk
+   adb reboot
+   ```
+
+Verified on the LeTV Android 9 television in this repository's setup: after reboot it opened 影视仓 automatically. The helper requests `RECEIVE_BOOT_COMPLETED`; allow its auto-start permission if the TV asks. The LeTV desktop and remote control remain installed.
+
+### Update and uninstall
+
+Actions creates a debug-signed APK, and signatures may differ between builds. If an update reports a signature mismatch, uninstall `local.letv.bootbridge` with `adb uninstall local.letv.bootbridge`, then install the new APK. Removing the helper stops automatic launch; it does not uninstall 影视仓 or the LeTV desktop.
 
 ## Build
 
